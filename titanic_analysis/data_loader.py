@@ -1,6 +1,7 @@
 import pandas as pd
+import os
 
-def load_titanic_data(filepath: str) -> pd.DataFrame:
+def load_titanic_data(filepath: str = None) -> pd.DataFrame:
     """
     Loads the Titanic dataset from the specified file path.
     
@@ -10,4 +11,8 @@ def load_titanic_data(filepath: str) -> pd.DataFrame:
     Returns:
         pd.DataFrame: Loaded Titanic dataset as a DataFrame.
     """
-    pass  # Implement the loading logic here
+    if filepath is None:
+        # Use a default path relative to the current file's directory
+        filepath = os.path.join(os.path.dirname(__file__), '../../data/titanic.csv')
+    
+    return pd.read_csv(filepath)
