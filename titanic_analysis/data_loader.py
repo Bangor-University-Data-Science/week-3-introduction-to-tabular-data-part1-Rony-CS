@@ -15,4 +15,10 @@ def load_titanic_data(filepath: str = None) -> pd.DataFrame:
         # Use a default path relative to the current file's directory
         filepath = os.path.join(os.path.dirname(__file__), '../../data/titanic.csv')
     
-    return pd.read_csv(filepath)
+    try:
+        df = pd.read_csv(filepath)
+    except Exception as e:
+        print(f"Error loading data: {e}")
+        raise
+    
+    return df
