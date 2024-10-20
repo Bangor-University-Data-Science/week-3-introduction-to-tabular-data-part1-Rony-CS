@@ -1,9 +1,10 @@
 import pandas as pd
 from titanic_analysis.data_loader import load_titanic_data
+import os
 
 def test_load_titanic_data():
-    # Use the absolute path to your dataset for testing
-    data_path = r"M:\Data Science\week-3-introduction-to-tabular-data-part1-Rony-CS\data\titanic.csv"
+    # Use a relative path based on the current file's location
+    data_path = os.path.join("data", "titanic.csv")  # Adjust this if the path changes
     
     df = load_titanic_data(data_path)
     
