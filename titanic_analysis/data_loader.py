@@ -14,11 +14,16 @@ def load_titanic_data(filepath: str = "data/titanic.csv") -> pd.DataFrame:
     Raises:
         FileNotFoundError: If the specified file does not exist.
     """
-    # Try to use the provided filepath, falling back to a relative path
+    # First, check if the provided filepath exists
     if not os.path.isfile(filepath):
-        default_path = os.path.join(os.path.dirname(__file__), "data/titanic.csv")
-        if not os.path.isfile(default_path):
-            raise FileNotFoundError(f"File not found: {filepath} or {default_path}")
-        filepath = default_path
+        # Attempt to find a relative path
+        current_dir = os.path.dirname(os.path.abspath(__file__))
+        relative_path = os.path.join(current_dir, "data/titanic.csv")
+        
+        if not os.path.isfile(relative_path):
+            raise FileNotFoundError(f"File not found at {filepath} or {relative_path}")
+        
+        # Use the relative path if the absolute path fails
+        filepath = relative_path
     
     return pd.read_csv(filepath)
